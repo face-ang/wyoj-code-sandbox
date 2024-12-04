@@ -9,7 +9,6 @@ import com.xjtu.wyojcodesandbox.model.ExecuteCodeRequest;
 import com.xjtu.wyojcodesandbox.model.ExecuteCodeResponse;
 import com.xjtu.wyojcodesandbox.model.ExecuteMessage;
 import com.xjtu.wyojcodesandbox.model.JudgeInfo;
-import com.xjtu.wyojcodesandbox.security.DefaultSecurityManager;
 import com.xjtu.wyojcodesandbox.utils.ProcessUtils;
 
 import java.io.File;
@@ -19,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-public class JavaNativeCodeSandbox implements CodeSandbox {
+public class JavaNativeCodeSandboxOld implements CodeSandbox {
     private static final String GLOBAL_CODE_DIR_NAME = "tmpCode";
     private static final String GLOBAL_JAVA_CLASS_NAME = "Main.java";
 
@@ -38,14 +37,14 @@ public class JavaNativeCodeSandbox implements CodeSandbox {
     }
 
     public static void main(String[] args) {
-        JavaNativeCodeSandbox javaNativeCodeSandbox = new JavaNativeCodeSandbox();
+        JavaNativeCodeSandboxOld javaNativeCodeSandboxOld = new JavaNativeCodeSandboxOld();
         ExecuteCodeRequest executeCodeRequest = new ExecuteCodeRequest();
         executeCodeRequest.setInputList(Arrays.asList("1 2", "3 4"));
         String code = ResourceUtil.readStr("testCode/simpleComputeArgs/Main.java", StandardCharsets.UTF_8);
 //        String code = ResourceUtil.readStr("testCode/simpleCompute/Main.java", StandardCharsets.UTF_8);
         executeCodeRequest.setCode(code);
         executeCodeRequest.setLanguage("java");
-        ExecuteCodeResponse executeCodeResponse = javaNativeCodeSandbox.executeCode(executeCodeRequest);
+        ExecuteCodeResponse executeCodeResponse = javaNativeCodeSandboxOld.executeCode(executeCodeRequest);
         System.out.println(executeCodeResponse);
     }
 

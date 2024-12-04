@@ -1,4 +1,4 @@
-package com.xjtu.wyoj.judge.codesandbox.model;
+package com.xjtu.wyojcodesandbox.model;
 
 import lombok.Data;
 

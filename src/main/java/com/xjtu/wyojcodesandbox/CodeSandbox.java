@@ -1,7 +1,7 @@
-package com.xjtu.wyoj.judge.codesandbox;
+package com.xjtu.wyojcodesandbox;
 
-import com.xjtu.wyoj.judge.codesandbox.model.ExecuteCodeRequest;
-import com.xjtu.wyoj.judge.codesandbox.model.ExecuteCodeResponse;
+import com.xjtu.wyojcodesandbox.model.ExecuteCodeRequest;
+import com.xjtu.wyojcodesandbox.model.ExecuteCodeResponse;
 
 /**
  * 代码沙箱接口定义

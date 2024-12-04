@@ -1,2 +1,47 @@
-package com.xjtu.wyojcodesandbox.controller;public class MainController {
+package com.xjtu.wyojcodesandbox.controller;
+
+import com.xjtu.wyojcodesandbox.JavaNativeCodeSandbox;
+import com.xjtu.wyojcodesandbox.model.ExecuteCodeRequest;
+import com.xjtu.wyojcodesandbox.model.ExecuteCodeResponse;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@RestController("/")
+public class MainController {
+
+    public static final String AUTH_REQUEST_HEADER = "auth";
+    public static final String AUTH_REQUEST_SECRET = "secretKey";
+
+    @Resource
+    private JavaNativeCodeSandbox javaNativeCodeSandbox;
+    @GetMapping("/health")
+    public String healthCheck(){
+        return "ok";
+    }
+
+    /**
+     * 执行代码
+     * @param executeCodeRequest
+     * @return
+     */
+    @PostMapping("/executeCode")
+    public ExecuteCodeResponse executeCode(@RequestBody ExecuteCodeRequest executeCodeRequest, HttpServletRequest request,
+                                           HttpServletResponse response) {
+        // 基本认证
+        String authHeader = request.getHeader(AUTH_REQUEST_HEADER);
+        if (!AUTH_REQUEST_SECRET.equals(authHeader)) {
+            response.setStatus(403);
+            return null;
+        }
+        if (executeCodeRequest == null) {
+            throw new RuntimeException("请求参数为空");
+        }
+        return javaNativeCodeSandbox.executeCode(executeCodeRequest);
+    }
 }
