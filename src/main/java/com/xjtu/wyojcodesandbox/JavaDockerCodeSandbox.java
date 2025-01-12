@@ -166,7 +166,7 @@ public class JavaDockerCodeSandbox extends JavaCodeSandboxTemplate {
             statsCmd.exec(statisticsResultCallback);
             try {
                 stopWatch.start(); // 计时开始
-                dockerClient.execStartCmd(execId).exec(execStartResultCallback).awaitCompletion(TIME_OUT, TimeUnit.MICROSECONDS);
+                dockerClient.execStartCmd(execId).exec(execStartResultCallback).awaitCompletion(TIME_OUT, TimeUnit.MILLISECONDS);
                 stopWatch.stop();  // 计时结束
                 time = stopWatch.getLastTaskTimeMillis();
                 statsCmd.close(); // 关闭统计
